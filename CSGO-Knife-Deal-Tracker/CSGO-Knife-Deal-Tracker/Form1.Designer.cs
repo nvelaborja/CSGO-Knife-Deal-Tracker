@@ -48,12 +48,12 @@
             this.messageBoard = new System.Windows.Forms.ListBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.knifeGrid = new System.Windows.Forms.DataGridView();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.KnifeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KnifeURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MedianPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LowPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DesiredPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.percentage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RefreshInterval)).BeginInit();
@@ -132,6 +132,7 @@
             // 
             this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonStop.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.buttonStop.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonStop.Location = new System.Drawing.Point(259, 121);
             this.buttonStop.Name = "buttonStop";
@@ -145,6 +146,7 @@
             // 
             this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonStart.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.buttonStart.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonStart.Location = new System.Drawing.Point(22, 121);
             this.buttonStart.Name = "buttonStart";
@@ -309,11 +311,6 @@
             this.knifeGrid.Size = new System.Drawing.Size(996, 387);
             this.knifeGrid.TabIndex = 0;
             // 
-            // timer
-            // 
-            this.timer.Enabled = true;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
             // KnifeName
             // 
             this.KnifeName.HeaderText = "Knife Name";
@@ -348,6 +345,11 @@
             this.DesiredPrice.Name = "DesiredPrice";
             this.DesiredPrice.ReadOnly = true;
             this.DesiredPrice.Width = 75;
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // mainForm
             // 

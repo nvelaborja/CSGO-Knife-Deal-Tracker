@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Media;
+using System.Threading;
 
 namespace CSGO_Knife_Deal_Tracker
 {
@@ -27,7 +28,10 @@ namespace CSGO_Knife_Deal_Tracker
 
             knives = new List<Knife>();
 
-            InitializeKnives();
+            Thread initThread = new Thread(InitializeKnives);
+            initThread.Start();
+            
+            //InitializeKnives();
 
             textBoxURLBase.Text = baseURL;
 
@@ -78,6 +82,8 @@ namespace CSGO_Knife_Deal_Tracker
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            textBoxURLBase.Text = baseURL;
+
             if (execute)
             {
                 knifeGrid.Rows.Clear();
@@ -100,7 +106,7 @@ namespace CSGO_Knife_Deal_Tracker
                 knifeGrid.Rows[i].Cells[3].Value = knife.LowPrice;
                 knifeGrid.Rows[i].Cells[4].Value = knife.DesiredPrice;
 
-                if (knife.LowPrice <= knife.DesiredPrice && knife.LowPrice != 0)
+                if (knife.LowPrice <= knife.DesiredPrice && knife.LowPrice != 0 && knife.PrevLow != 0)
                 {
                     messageBoard.ForeColor = Color.Pink;
                     messageBoard.Items.Add(knife.Name);
