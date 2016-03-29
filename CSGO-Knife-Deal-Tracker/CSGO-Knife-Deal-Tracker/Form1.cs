@@ -23,6 +23,8 @@ namespace CSGO_Knife_Deal_Tracker
         {
             InitializeComponent();
 
+            sound = new SoundPlayer(Application.StartupPath + "\\..\\..\\air-horn-club-sample_1.wav");
+
             knives = new List<Knife>();
 
             InitializeKnives();
@@ -34,8 +36,6 @@ namespace CSGO_Knife_Deal_Tracker
             execute = false;
 
             knifeGrid.DefaultCellStyle.ForeColor = Color.Black;
-
-            sound = new SoundPlayer(Application.StartupPath + "\\..\\..\\air-horn-club-sample_1.wav");
         }
 
         private void InitializeKnives()
@@ -44,9 +44,11 @@ namespace CSGO_Knife_Deal_Tracker
             List<string> linePieces = new List<string>();
             string line;
 
-            while(!reader.EndOfStream)
+            while (!reader.EndOfStream)
             {
                 line = reader.ReadLine();
+
+                if (line[0] == '/' && line[1] == '/') continue;
 
                 linePieces = line.Split(',').ToList();
 
@@ -60,6 +62,8 @@ namespace CSGO_Knife_Deal_Tracker
                     knives.Add(newKnife);
                 }
             }
+
+            populateGrid();
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -78,28 +82,35 @@ namespace CSGO_Knife_Deal_Tracker
             {
                 knifeGrid.Rows.Clear();
 
-                foreach (Knife knife in knives)
+                populateGrid();
+            }
+        }
+
+        private void populateGrid()
+        {
+            for (int i = 0; i < knives.Count; i++)
+            {
+                Knife knife = knives[i];
+
+                knife.Update();
+                knifeGrid.Rows.Add();
+                knifeGrid.Rows[i].Cells[0].Value = knife.Name;
+                knifeGrid.Rows[i].Cells[1].Value = knife.KnifeURL;
+                knifeGrid.Rows[i].Cells[2].Value = knife.MedPrice;
+                knifeGrid.Rows[i].Cells[3].Value = knife.LowPrice;
+                knifeGrid.Rows[i].Cells[4].Value = knife.DesiredPrice;
+
+                if (knife.LowPrice <= knife.DesiredPrice && knife.LowPrice != 0)
                 {
-                    knife.Update();
-                    knifeGrid.Rows.Add();
-                    knifeGrid.Rows[knifeGrid.Rows.Count - 1].Cells[0].Value = knife.Name;
-                    knifeGrid.Rows[knifeGrid.Rows.Count - 1].Cells[1].Value = knife.KnifeURL;
-                    knifeGrid.Rows[knifeGrid.Rows.Count - 1].Cells[2].Value = knife.MedPrice;
-                    knifeGrid.Rows[knifeGrid.Rows.Count - 1].Cells[3].Value = knife.LowPrice;
-                    knifeGrid.Rows[knifeGrid.Rows.Count - 1].Cells[4].Value = knife.DesiredPrice;
-                    
-                    if (knife.LowPrice <= knife.DesiredPrice)
-                    {
-                        messageBoard.ForeColor = Color.Pink;
-                        messageBoard.Items.Add(knife.Name);
-                        messageBoard.ForeColor = Color.White;
-                        sound.Play();
-                    }
-                    else if (knife.LowPrice != knife.PrevLow)
-                    {
-                        messageBoard.Items.Add(knife.Name + " Has changed price.");
-                        SystemSounds.Beep.Play();
-                    }
+                    messageBoard.ForeColor = Color.Pink;
+                    messageBoard.Items.Add(knife.Name);
+                    messageBoard.ForeColor = Color.White;
+                    sound.Play();
+                }
+                else if (knife.LowPrice != knife.PrevLow)
+                {
+                    messageBoard.Items.Add(knife.Name + " Has changed price.");
+                    SystemSounds.Beep.Play();
                 }
             }
         }

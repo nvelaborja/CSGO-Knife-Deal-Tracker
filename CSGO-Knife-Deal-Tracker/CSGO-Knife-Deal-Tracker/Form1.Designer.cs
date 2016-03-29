@@ -48,12 +48,12 @@
             this.messageBoard = new System.Windows.Forms.ListBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.knifeGrid = new System.Windows.Forms.DataGridView();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.KnifeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KnifeURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MedianPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LowPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DesiredPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.percentage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RefreshInterval)).BeginInit();
@@ -184,7 +184,7 @@
             this.RefreshInterval.TabIndex = 3;
             this.RefreshInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.RefreshInterval.Value = new decimal(new int[] {
-            3,
+            5,
             0,
             0,
             0});
@@ -230,7 +230,7 @@
             this.groupBox2.ForeColor = System.Drawing.SystemColors.Control;
             this.groupBox2.Location = new System.Drawing.Point(532, 13);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(385, 157);
+            this.groupBox2.Size = new System.Drawing.Size(520, 157);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Message Board ";
@@ -262,7 +262,7 @@
             this.buttonDismissMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonDismissMessage.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.buttonDismissMessage.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonDismissMessage.Location = new System.Drawing.Point(293, 121);
+            this.buttonDismissMessage.Location = new System.Drawing.Point(429, 121);
             this.buttonDismissMessage.Name = "buttonDismissMessage";
             this.buttonDismissMessage.Size = new System.Drawing.Size(85, 23);
             this.buttonDismissMessage.TabIndex = 1;
@@ -278,7 +278,7 @@
             this.messageBoard.Location = new System.Drawing.Point(7, 20);
             this.messageBoard.Name = "messageBoard";
             this.messageBoard.ScrollAlwaysVisible = true;
-            this.messageBoard.Size = new System.Drawing.Size(372, 95);
+            this.messageBoard.Size = new System.Drawing.Size(507, 95);
             this.messageBoard.TabIndex = 0;
             // 
             // groupBox3
@@ -287,7 +287,7 @@
             this.groupBox3.ForeColor = System.Drawing.SystemColors.Control;
             this.groupBox3.Location = new System.Drawing.Point(13, 176);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(904, 432);
+            this.groupBox3.Size = new System.Drawing.Size(1039, 432);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Knife Stats";
@@ -306,22 +306,27 @@
             this.knifeGrid.Location = new System.Drawing.Point(22, 29);
             this.knifeGrid.Name = "knifeGrid";
             this.knifeGrid.ReadOnly = true;
-            this.knifeGrid.Size = new System.Drawing.Size(858, 387);
+            this.knifeGrid.Size = new System.Drawing.Size(996, 387);
             this.knifeGrid.TabIndex = 0;
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // KnifeName
             // 
             this.KnifeName.HeaderText = "Knife Name";
             this.KnifeName.Name = "KnifeName";
             this.KnifeName.ReadOnly = true;
-            this.KnifeName.Width = 300;
+            this.KnifeName.Width = 350;
             // 
             // KnifeURL
             // 
             this.KnifeURL.HeaderText = "Knife URL";
             this.KnifeURL.Name = "KnifeURL";
             this.KnifeURL.ReadOnly = true;
-            this.KnifeURL.Width = 300;
+            this.KnifeURL.Width = 350;
             // 
             // MedianPrice
             // 
@@ -344,23 +349,18 @@
             this.DesiredPrice.ReadOnly = true;
             this.DesiredPrice.Width = 75;
             // 
-            // timer
-            // 
-            this.timer.Enabled = true;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(929, 620);
+            this.ClientSize = new System.Drawing.Size(1064, 620);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(945, 659);
-            this.MinimumSize = new System.Drawing.Size(945, 659);
+            this.MaximumSize = new System.Drawing.Size(1080, 659);
+            this.MinimumSize = new System.Drawing.Size(1080, 659);
             this.Name = "mainForm";
             this.Opacity = 0.9D;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
