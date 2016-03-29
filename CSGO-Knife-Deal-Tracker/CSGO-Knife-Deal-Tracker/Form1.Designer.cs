@@ -48,12 +48,12 @@
             this.messageBoard = new System.Windows.Forms.ListBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.knifeGrid = new System.Windows.Forms.DataGridView();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.KnifeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KnifeURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MedianPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LowPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DesiredPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.percentage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RefreshInterval)).BeginInit();
@@ -184,7 +184,7 @@
             this.RefreshInterval.TabIndex = 3;
             this.RefreshInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.RefreshInterval.Value = new decimal(new int[] {
-            1,
+            3,
             0,
             0,
             0});
@@ -309,11 +309,6 @@
             this.knifeGrid.Size = new System.Drawing.Size(858, 387);
             this.knifeGrid.TabIndex = 0;
             // 
-            // timer
-            // 
-            this.timer.Enabled = true;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
             // KnifeName
             // 
             this.KnifeName.HeaderText = "Knife Name";
@@ -348,6 +343,11 @@
             this.DesiredPrice.Name = "DesiredPrice";
             this.DesiredPrice.ReadOnly = true;
             this.DesiredPrice.Width = 75;
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // mainForm
             // 

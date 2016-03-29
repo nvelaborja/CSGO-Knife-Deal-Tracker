@@ -122,38 +122,45 @@ namespace CSGO_Knife_Deal_Tracker
 
         private void GetData()
         {
-            string fileText = (new WebClient()).DownloadString(FullURL);
-            char[] badChars = new char[4] { '{', '}', (char) 92, (char)34 };
-            // Example text in expected format: {"success":true,"lowest_price":"104,--\u20ac","volume":"4","median_price":"100,29\u20ac"}
-
-            prevLow = lowPrice;
-
-            fileText = fileText.Replace(',', ' ');                              // Replace all commas with spaces
-            fileText = fileText.Replace(':', ' ');                              // Replace all colons with spaces
-
-            List<string> textPieces = fileText.Split(' ').ToList();             // Tokenize the file text by the newly created spaces
-
-            for (int i = 0; i < textPieces.Count; i++)
+            try
             {
-                string currentPiece = textPieces[i];
+                string fileText = (new WebClient()).DownloadString(FullURL);
+                char[] badChars = new char[4] { '{', '}', (char)92, (char)34 };
+                // Example text in expected format: {"success":true,"lowest_price":"104,--\u20ac","volume":"4","median_price":"100,29\u20ac"}
 
-                if (currentPiece == "\"lowest_price\"")
+                prevLow = lowPrice;
+
+                fileText = fileText.Replace(',', ' ');                              // Replace all commas with spaces
+                fileText = fileText.Replace(':', ' ');                              // Replace all colons with spaces
+
+                List<string> textPieces = fileText.Split(' ').ToList();             // Tokenize the file text by the newly created spaces
+
+                for (int i = 0; i < textPieces.Count; i++)
                 {
-                    string piece = textPieces[i + 1];
-                    piece = piece.Substring(1);
-                    LowPrice = Convert.ToDouble(piece);
-                    i++;
+                    string currentPiece = textPieces[i];
+
+                    if (currentPiece == "\"lowest_price\"")
+                    {
+                        string piece = textPieces[i + 1];
+                        piece = piece.Substring(1);
+                        LowPrice = Convert.ToDouble(piece);
+                        i++;
+                    }
+                    else if (currentPiece == "\"median_price\"")
+                    {
+                        string piece = textPieces[i + 1];
+                        piece = piece.Substring(1);
+                        MedPrice = Convert.ToDouble(piece);
+                        i++;
+                    }
                 }
-                else if (currentPiece == "\"median_price\"")
-                {
-                    string piece = textPieces[i + 1];
-                    piece = piece.Substring(1);
-                    MedPrice = Convert.ToDouble(piece);
-                    i++;
-                }
+
+                DesiredPrice = MedPrice * (1 - (percentage * 0.01));
             }
-
-            DesiredPrice = MedPrice * (1 - (percentage * 0.01));
+            catch
+            {
+                return;
+            }
         }
 
         public void Update()
