@@ -1,1 +1,2 @@
-﻿
+﻿BaseURL,http://steamcommunity.com/market/priceoverview/?currency=3&appid=730&market_hash_name=
+KnifeURL,★%20Karambit%20%7C%20Safari%20Mesh%20%28Battle-Scarred%29
