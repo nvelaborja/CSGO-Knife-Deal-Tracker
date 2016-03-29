@@ -47,7 +47,11 @@ namespace CSGO_Knife_Deal_Tracker
         public double LowPrice
         {
             get { return lowPrice; }
-            set { lowPrice = value; }
+            set
+            {
+                prevLow = lowPrice;
+                lowPrice = value;
+            }
         }
 
         public double MedPrice
@@ -114,6 +118,20 @@ namespace CSGO_Knife_Deal_Tracker
             }
 
             newName = newName.Trim();                       // Take the space off the end just for good measure
+
+            for (int i = 0; i < newName.Length; i++)
+            {
+                if (newName[i] >= '0' && newName[i] <= '9')
+                {
+                    if (i == 0) newName = newName.Substring(1);
+                    else newName = newName.Substring(0, i - 1) + " " + newName.Substring(i + 1);
+                }
+            }
+
+            newName = newName.Substring(2);
+            newName = newName.Substring(0, newName.Length - 2);
+
+            
 
             this.name = newName;
 

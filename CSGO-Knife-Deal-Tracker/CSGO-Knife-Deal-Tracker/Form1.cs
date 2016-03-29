@@ -109,7 +109,7 @@ namespace CSGO_Knife_Deal_Tracker
                 }
                 else if (knife.LowPrice != knife.PrevLow)
                 {
-                    messageBoard.Items.Add(knife.Name + " Has changed price.");
+                    messageBoard.Items.Add(knife.Name + " Has changed price from " + knife.PrevLow + " to " + knife.LowPrice + ".");
                     SystemSounds.Beep.Play();
                 }
             }
